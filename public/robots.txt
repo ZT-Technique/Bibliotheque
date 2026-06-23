@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Disallow admin routes
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+Disallow: /password/
+
+# Sitemaps (to be generated if needed later)
+# Sitemap: {{ url('/sitemap.xml') }}

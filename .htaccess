@@ -1,0 +1,26 @@
+# Disable directory browsing
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Prevent access to Laravel directories from root
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor)/.*$ - [F,L]
+    
+    # Redirect to public directory if document root is not set to public
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /public/$1 [L]
+</IfModule>
+
+# Security: Prevent access to sensitive files
+<FilesMatch "\.(env|log|htaccess|htpasswd|ini|phps|fla|psd|log|sh|json)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
+</FilesMatch>

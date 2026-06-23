@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Bibliothèque INOHA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'inoha': {
+                            'green': '#22C55E',
+                            'green-dark': '#16A34A',
+                            'green-light': '#4ADE80',
+                            'black': '#0A0A0A',
+                            'gray': '#F8FAFC',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-inoha-black antialiased">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-inoha-black text-white transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <!-- Logo -->
+                <div class="p-6 border-b border-white/10">
+                    <a href="index.html" class="flex items-center justify-center">
+                        <img src="/images/logo-inoha-transparent.png" alt="INOHA" class="h-14 w-auto brightness-0 invert">
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 bg-inoha-green text-white rounded-xl font-medium">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        Tableau de bord
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-white/10 rounded-xl font-medium transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        Publications
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-white/10 rounded-xl font-medium transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                        Ajouter un document
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-white/10 rounded-xl font-medium transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                        </svg>
+                        Catégories
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-white/10 rounded-xl font-medium transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                        Utilisateurs
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-white/10 rounded-xl font-medium transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                        Statistiques
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-white/10 rounded-xl font-medium transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        Paramètres
+                    </a>
+                </nav>
+                
+                <!-- User Info -->
+                <div class="p-4 border-t border-white/10">
+                    <div class="flex items-center gap-3 px-4 py-3">
+                        <div class="w-10 h-10 bg-inoha-green rounded-full flex items-center justify-center">
+                            <span class="text-white font-semibold text-sm">AD</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-medium text-sm truncate">Admin INOHA</p>
+                            <p class="text-xs text-gray-400 truncate">admin@inoha.cd</p>
+                        </div>
+                        <button class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Overlay for mobile -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top Header -->
+            <header class="bg-white border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <!-- Mobile Menu Button -->
+                        <button id="sidebar-toggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                        </button>
+                        <div>
+                            <h1 class="text-xl sm:text-2xl font-bold">Tableau de bord</h1>
+                            <p class="text-sm text-gray-500 hidden sm:block">Bienvenue dans l'espace d'administration</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3">
+                        <!-- Notifications -->
+                        <button class="relative p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                            </svg>
+                            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        
+                        <!-- Quick Add -->
+                        <button class="hidden sm:flex items-center gap-2 px-4 py-2 bg-inoha-green text-white rounded-xl font-medium hover:bg-inoha-green-dark transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                            </svg>
+                            Ajouter
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+                    <!-- Total Publications -->
+                    <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-inoha-green/10 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-inoha-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                </svg>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">+12%</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-1">2,547</h3>
+                        <p class="text-gray-500 text-sm">Publications totales</p>
+                    </div>
+                    
+                    <!-- Total Downloads -->
+                    <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">+28%</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-1">45,892</h3>
+                        <p class="text-gray-500 text-sm">Telechargements</p>
+                    </div>
+                    
+                    <!-- Active Users -->
+                    <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                </svg>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">+8%</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-1">1,234</h3>
+                        <p class="text-gray-500 text-sm">Utilisateurs actifs</p>
+                    </div>
+                    
+                    <!-- Page Views -->
+                    <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">+15%</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-1">128K</h3>
+                        <p class="text-gray-500 text-sm">Vues ce mois</p>
+                    </div>
+                </div>
+                
+                <!-- Two Column Layout -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Recent Publications -->
+                    <div class="lg:col-span-2 bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                        <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+                            <h2 class="font-semibold text-lg">Publications recentes</h2>
+                            <a href="#" class="text-inoha-green text-sm font-medium hover:underline">Voir tout</a>
+                        </div>
+                        <div class="divide-y divide-gray-100">
+                            <!-- Publication Item 1 -->
+                            <div class="p-4 sm:p-6 hover:bg-gray-50 transition-colors">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-16 h-20 bg-gradient-to-br from-inoha-green/20 to-inoha-green/5 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-inoha-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="font-medium text-sm sm:text-base line-clamp-1">Approche One Health dans la surveillance des zoonoses emergentes</h3>
+                                        <p class="text-sm text-gray-500 mt-1">Dr. Jean Mukendi - Article scientifique</p>
+                                        <div class="flex items-center gap-3 mt-2 text-xs text-gray-400">
+                                            <span>Il y a 2 heures</span>
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                                </svg>
+                                                45
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">Publie</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Publication Item 2 -->
+                            <div class="p-4 sm:p-6 hover:bg-gray-50 transition-colors">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-16 h-20 bg-gradient-to-br from-blue-100 to-blue-50 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="font-medium text-sm sm:text-base line-clamp-1">Impact du changement climatique sur les maladies vectorielles</h3>
+                                        <p class="text-sm text-gray-500 mt-1">Prof. Marie Kalala - These</p>
+                                        <div class="flex items-center gap-3 mt-2 text-xs text-gray-400">
+                                            <span>Il y a 5 heures</span>
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                                </svg>
+                                                28
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">En attente</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Publication Item 3 -->
+                            <div class="p-4 sm:p-6 hover:bg-gray-50 transition-colors">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-16 h-20 bg-gradient-to-br from-amber-100 to-amber-50 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="font-medium text-sm sm:text-base line-clamp-1">Biodiversite et emergence des pathogenes en foret tropicale</h3>
+                                        <p class="text-sm text-gray-500 mt-1">Dr. Paul Ngoma - Rapport</p>
+                                        <div class="flex items-center gap-3 mt-2 text-xs text-gray-400">
+                                            <span>Hier</span>
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                                </svg>
+                                                67
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">Publie</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Publication Item 4 -->
+                            <div class="p-4 sm:p-6 hover:bg-gray-50 transition-colors">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-16 h-20 bg-gradient-to-br from-rose-100 to-rose-50 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="font-medium text-sm sm:text-base line-clamp-1">Surveillance epidemiologique en Afrique centrale</h3>
+                                        <p class="text-sm text-gray-500 mt-1">OMS Afrique - Guide</p>
+                                        <div class="flex items-center gap-3 mt-2 text-xs text-gray-400">
+                                            <span>Il y a 2 jours</span>
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                                </svg>
+                                                112
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">Publie</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="space-y-6">
+                        <!-- Quick Actions -->
+                        <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                            <h2 class="font-semibold text-lg mb-4">Actions rapides</h2>
+                            <div class="space-y-3">
+                                <button class="w-full flex items-center gap-3 px-4 py-3 bg-inoha-green/10 text-inoha-green rounded-xl font-medium hover:bg-inoha-green/20 transition-colors text-left">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                    </svg>
+                                    Nouvelle publication
+                                </button>
+                                <button class="w-full flex items-center gap-3 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-colors text-left">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                                    </svg>
+                                    Ajouter un auteur
+                                </button>
+                                <button class="w-full flex items-center gap-3 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-colors text-left">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                                    </svg>
+                                    Gerer les categories
+                                </button>
+                                <button class="w-full flex items-center gap-3 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-colors text-left">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                    Exporter les statistiques
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Categories Distribution -->
+                        <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                            <h2 class="font-semibold text-lg mb-4">Repartition par categorie</h2>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex items-center justify-between text-sm mb-2">
+                                        <span class="text-gray-600">Sante Humaine</span>
+                                        <span class="font-medium">845</span>
+                                    </div>
+                                    <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-inoha-green rounded-full" style="width: 33%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between text-sm mb-2">
+                                        <span class="text-gray-600">Sante Animale</span>
+                                        <span class="font-medium">623</span>
+                                    </div>
+                                    <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-blue-500 rounded-full" style="width: 24%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between text-sm mb-2">
+                                        <span class="text-gray-600">Environnement</span>
+                                        <span class="font-medium">478</span>
+                                    </div>
+                                    <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-amber-500 rounded-full" style="width: 19%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between text-sm mb-2">
+                                        <span class="text-gray-600">Zoonoses</span>
+                                        <span class="font-medium">356</span>
+                                    </div>
+                                    <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-rose-500 rounded-full" style="width: 14%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between text-sm mb-2">
+                                        <span class="text-gray-600">Autres</span>
+                                        <span class="font-medium">245</span>
+                                    </div>
+                                    <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-gray-400 rounded-full" style="width: 10%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity -->
+                <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                    <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+                        <h2 class="font-semibold text-lg">Activite recente</h2>
+                        <select class="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-inoha-green/30">
+                            <option>Aujourd'hui</option>
+                            <option>Cette semaine</option>
+                            <option>Ce mois</option>
+                        </select>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-6">
+                            <!-- Activity Item 1 -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm"><span class="font-medium">Dr. Jean Mukendi</span> a ajoute une nouvelle publication</p>
+                                    <p class="text-xs text-gray-500 mt-1">Il y a 15 minutes</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Activity Item 2 -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm"><span class="font-medium">125 telechargements</span> du rapport sur les zoonoses</p>
+                                    <p class="text-xs text-gray-500 mt-1">Il y a 1 heure</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Activity Item 3 -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm"><span class="font-medium">Nouvel utilisateur</span> inscrit depuis l'Universite de Lubumbashi</p>
+                                    <p class="text-xs text-gray-500 mt-1">Il y a 2 heures</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Activity Item 4 -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm"><span class="font-medium">Publication modifiee</span> - Mise a jour des metadonnees</p>
+                                    <p class="text-xs text-gray-500 mt-1">Il y a 3 heures</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Activity Item 5 -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm"><span class="font-medium">Publication approuvee</span> par le comite editorial</p>
+                                    <p class="text-xs text-gray-500 mt-1">Il y a 5 heures</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script>
+        // Sidebar Toggle for Mobile
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            sidebarOverlay.classList.toggle('hidden');
+        });
+        
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
